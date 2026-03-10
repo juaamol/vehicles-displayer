@@ -1,0 +1,15 @@
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+
+  .search-input {
+    flex: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .search-form {
+    width: 50%;
+    margin: auto;
+  }
+}

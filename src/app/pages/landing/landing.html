@@ -1,1 +1,21 @@
-<p>landing works!</p>
+<form class="search-form">
+  @if (byName()) {
+    <mat-form-field class="search-input">
+      <mat-label>Brand by name</mat-label>
+      <input matInput placeholder="Introduce the Brands' name" value="" />
+    </mat-form-field>
+  } @else {
+    <mat-form-field class="search-input">
+      <mat-label>Brand by Id</mat-label>
+      <input matInput placeholder="Introduce the Brands' Id" value="" />
+    </mat-form-field>
+  }
+
+  <mat-form-field>
+    <mat-label>Search by</mat-label>
+    <mat-select>
+      <mat-option [value]="true">Name</mat-option>
+      <mat-option [value]="false">Id</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
