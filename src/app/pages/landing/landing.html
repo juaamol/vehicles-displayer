@@ -19,3 +19,7 @@
     </mat-select>
   </mat-form-field>
 </form>
+
+<cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="makes-list">
+  <div *cdkVirtualFor="let make of makes()" class="make">{{ make.name }}</div>
+</cdk-virtual-scroll-viewport>

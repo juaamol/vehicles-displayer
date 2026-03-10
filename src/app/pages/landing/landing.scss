@@ -7,6 +7,16 @@
   }
 }
 
+.makes-list {
+  height: 400px;
+  width: 100%;
+
+  .make {
+    height: 50px;
+    display: block;
+  }
+}
+
 @media (min-width: 768px) {
   .search-form {
     width: 50%;
