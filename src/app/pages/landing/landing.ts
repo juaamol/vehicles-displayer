@@ -15,6 +15,5 @@ import { VehiclesService } from '../../services/vehicles-service/vehicles-servic
 export class Landing {
   vehiclesService = inject(VehiclesService);
   byName = input(true);
-
   makes = toSignal(this.vehiclesService.getAllMakes(), { initialValue: [] });
 }
