@@ -1,37 +1,38 @@
-<form class="search-form">
-  @if (byName()) {
-    <mat-form-field class="search-input">
-      <mat-label>Brand by name</mat-label>
-      <input matInput placeholder="Introduce the Brands' name" value="" />
+<div class="page-wrapper">
+  <form class="search-form">
+    <mat-form-field>
+      <mat-label>Search by</mat-label>
+      <mat-select>
+        <mat-option [value]="true">Name</mat-option>
+        <mat-option [value]="false">Id</mat-option>
+      </mat-select>
     </mat-form-field>
-  } @else {
-    <mat-form-field class="search-input">
-      <mat-label>Brand by Id</mat-label>
-      <input matInput placeholder="Introduce the Brands' Id" value="" />
-    </mat-form-field>
-  }
+    @if (byName()) {
+      <mat-form-field class="search-input">
+        <mat-label>Brand by name</mat-label>
+        <input matInput placeholder="Introduce the Brands' name" value="" />
+      </mat-form-field>
+    } @else {
+      <mat-form-field class="search-input">
+        <mat-label>Brand by Id</mat-label>
+        <input matInput placeholder="Introduce the Brands' Id" value="" />
+      </mat-form-field>
+    }
+  </form>
 
-  <mat-form-field>
-    <mat-label>Search by</mat-label>
-    <mat-select>
-      <mat-option [value]="true">Name</mat-option>
-      <mat-option [value]="false">Id</mat-option>
-    </mat-select>
-  </mat-form-field>
-</form>
-
-<div class="table-container mat-elevation-z1" role="table" aria-label="Makes List">
-  <div class="header-row" role="rowgroup">
-    <div class="row" role="row">
-      <div class="cell header-cell" role="columnheader">Make Name</div>
-      <div class="cell header-cell" role="columnheader">ID</div>
+  <div class="table-container mat-elevation-z1" role="table" aria-label="Makes List">
+    <div class="header-row" role="rowgroup">
+      <div class="row" role="row">
+        <div class="cell header-cell" role="columnheader">Make Name</div>
+        <div class="cell header-cell" role="columnheader">ID</div>
+      </div>
     </div>
+
+    <cdk-virtual-scroll-viewport itemSize="48" minBufferPx="400" maxBufferPx="800" class="viewport">
+      <div *cdkVirtualFor="let make of makes()" class="data-row" role="row" mat-ripple>
+        <div class="cell" role="cell">{{ make.name }}</div>
+        <div class="cell" role="cell">{{ make.id }}</div>
+      </div>
+    </cdk-virtual-scroll-viewport>
   </div>
-
-  <cdk-virtual-scroll-viewport itemSize="48" minBufferPx="400" maxBufferPx="800" class="viewport">
-    <div *cdkVirtualFor="let make of makes()" class="data-row" role="row" mat-ripple>
-      <div class="cell" role="cell">{{ make.name }}</div>
-      <div class="cell" role="cell">{{ make.id }}</div>
-    </div>
-  </cdk-virtual-scroll-viewport>
 </div>
