@@ -3,7 +3,7 @@ import { Landing } from './pages/landing/landing';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'makes',
     component: Landing,
   },
   {
@@ -13,6 +13,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'makes',
   },
 ];

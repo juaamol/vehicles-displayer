@@ -10,6 +10,7 @@
 .search-form {
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 0.1rem;
 
   .search-input {
@@ -19,7 +20,6 @@
 
 @media (min-width: 768px) {
   .search-form {
-    width: 50%;
     margin: 0 auto;
     flex-direction: row;
     gap: 0.5rem;
