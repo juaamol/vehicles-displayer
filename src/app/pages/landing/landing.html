@@ -19,25 +19,5 @@
       </mat-form-field>
     }
   </form>
-
-  <div class="table-container mat-elevation-z1" role="table" aria-label="Makes List">
-    <div class="header-row" role="rowgroup">
-      <div class="row" role="row">
-        <div class="cell header-cell" role="columnheader">Make Name</div>
-        <div class="cell header-cell" role="columnheader">ID</div>
-      </div>
-    </div>
-
-    <cdk-virtual-scroll-viewport itemSize="48" minBufferPx="400" maxBufferPx="800" class="viewport">
-      <div
-        *cdkVirtualFor="let make of makes(); trackBy: trackById"
-        class="data-row"
-        role="row"
-        mat-ripple
-      >
-        <div class="cell" role="cell">{{ make.name }}</div>
-        <div class="cell" role="cell">{{ make.id }}</div>
-      </div>
-    </cdk-virtual-scroll-viewport>
-  </div>
+  <app-table [makes]="makes()"></app-table>
 </div>
