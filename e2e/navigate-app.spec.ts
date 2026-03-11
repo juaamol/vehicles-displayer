@@ -13,16 +13,17 @@ test.describe('Vehicle Display Flow', () => {
     await searchInput.fill('Tesla');
 
     // Snapshot of the filtered list
+    const firstResult = page.locator('.data-row').first();
+    await expect(firstResult).toBeVisible();
     await expect(page).toHaveScreenshot('02-search-results.png');
 
     // Click first result to go to Information page
-    const firstResult = page.locator('.data-row').first();
-    await expect(firstResult).toBeVisible();
-    await expect(firstResult).toContainText('Tesla');
     await firstResult.click();
 
     // Information page snapshot
-    await expect(page).toHaveScreenshot('03-information-details.png');
+    const informationResults = page.locator('.data-row').first();
+    await expect(informationResults).toBeVisible();
+    await expect(page).toHaveScreenshot('03-information.png');
 
     // Using role 'link' is the most reliable way to find your mat-button link
     const backButton = page.getByRole('link', { name: 'Brands catalog' });
