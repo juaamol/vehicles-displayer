@@ -9,16 +9,23 @@
 
 .search-form {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.1rem;
 
   .search-input {
     flex: 1;
   }
 }
 
+h1 {
+  text-align: center;
+}
+
 @media (min-width: 768px) {
   .search-form {
     width: 50%;
     margin: 0 auto;
+    flex-direction: row;
+    gap: 0.5rem;
   }
 }
