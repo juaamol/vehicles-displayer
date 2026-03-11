@@ -54,7 +54,7 @@ export class Landing implements OnInit {
     effect(() => {
       const query = this.searchForm.query().value();
       const isByName = this.searchForm.byName().value();
-      this.navigateTo(query, isByName);
+      this.updateUrl(query, isByName);
     });
   }
 
@@ -62,7 +62,11 @@ export class Landing implements OnInit {
     this.store.dispatch(MakesActions.loadMakes());
   }
 
-  private navigateTo(query: string, isByName: boolean) {
+  goTo(id: number) {
+    this.router.navigate([`/information/${id}`]);
+  }
+
+  private updateUrl(query: string, isByName: boolean) {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { query, byName: isByName },

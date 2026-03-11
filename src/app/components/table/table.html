@@ -11,6 +11,7 @@
     class="data-row"
     role="row"
     mat-ripple
+    (click)="clicked.emit(make)"
   >
     <div class="cell" role="cell">{{ make.name }}</div>
     <div class="cell" role="cell">{{ make.id }}</div>

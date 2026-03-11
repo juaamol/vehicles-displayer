@@ -1,5 +1,5 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-table',
@@ -13,6 +13,7 @@ import { Component, input } from '@angular/core';
 })
 export class Table {
   makes = input<Make[]>([]);
+  clicked = output<Make>();
 
   trackById(_: number, make: Make) {
     return make.id;

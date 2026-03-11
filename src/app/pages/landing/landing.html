@@ -20,5 +20,5 @@
     </mat-form-field>
   </form>
 
-  <app-table [makes]="filteredMakes()"></app-table>
+  <app-table [makes]="filteredMakes()" (clicked)="goTo($event.id)"></app-table>
 </div>

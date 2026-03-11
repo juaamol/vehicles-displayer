@@ -7,6 +7,11 @@ export const routes: Routes = [
     component: Landing,
   },
   {
+    path: 'information/:id',
+    loadComponent: () =>
+      import('./pages/makes-information/makes-information').then((m) => m.MakesInformation),
+  },
+  {
     path: '**',
     redirectTo: '',
   },
