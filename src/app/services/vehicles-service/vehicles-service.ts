@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { API_URL } from '../../environment/env';
+import { VehicleTypeDto } from './dtos/vehicle-type.dto';
+import { Make } from './models/make';
+import { Identifiable } from '../../components/table/identifiable';
 
 @Injectable({
   providedIn: 'root',
@@ -10,13 +14,26 @@ export class VehiclesService {
 
   getAllMakes(): Observable<Make[]> {
     return this.http
+      .get<{ Results: MakeDto[] }>(`${API_URL}/vehicles/GetAllMakes?format=json`)
+      .pipe(
+        map((response) =>
+          response.Results.map((dto: MakeDto): Make => ({ id: dto.Make_ID, name: dto.Make_Name })),
+        ),
+      );
+  }
+
+  getVehicleTypesByMakeId(makeId: number) {
+    return this.http
       .get<{
-        Results: MakeDto[];
-      }>('https://vpic.nhtsa.dot.gov/api/vehicles/GetAllMakes?format=json')
+        Results: VehicleTypeDto[];
+      }>(`${API_URL}/vehicles/GetVehicleTypesForMakeId/${makeId}?format=json`)
       .pipe(
         map((response) =>
           response.Results.map(
-            (make: MakeDto): Make => ({ id: make.Make_ID, name: make.Make_Name }),
+            (dto: VehicleTypeDto): Identifiable => ({
+              id: dto.VehicleTypeId,
+              name: dto.VehicleTypeName,
+            }),
           ),
         ),
       );

@@ -1,5 +1,6 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { Component, input, output } from '@angular/core';
+import { Identifiable } from './identifiable';
 
 @Component({
   selector: 'app-table',
@@ -8,14 +9,14 @@ import { Component, input, output } from '@angular/core';
   styleUrl: './table.scss',
   host: {
     role: 'table',
-    'aria-label': 'Makes List',
+    'aria-label': 'Items List',
   },
 })
 export class Table {
-  makes = input<Make[]>([]);
-  clicked = output<Make>();
+  items = input<Identifiable[]>([]);
+  clicked = output<Identifiable>();
 
-  trackById(_: number, make: Make) {
+  trackById(_: number, make: Identifiable) {
     return make.id;
   }
 }

@@ -1,4 +1,4 @@
-interface Make {
+export interface Identifiable {
   id: number;
   name: string;
 }
