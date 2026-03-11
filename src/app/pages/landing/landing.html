@@ -1,22 +1,24 @@
 <div class="page-wrapper">
   <h1 class="mat-headline-4">Vehicle Brand Explorer</h1>
+
   <form class="search-form">
     <mat-form-field>
       <mat-label>Search by</mat-label>
-      <mat-select [value]="byName()" (selectionChange)="toggleSearchType($event.value)">
+      <mat-select [formField]="searchForm.byName">
         <mat-option [value]="true">Name</mat-option>
         <mat-option [value]="false">Id</mat-option>
       </mat-select>
     </mat-form-field>
+
     <mat-form-field class="search-input">
-      <mat-label>Brand by {{ byName() ? 'Name' : 'Id' }}</mat-label>
+      <mat-label>Brand by {{ searchForm.byName().value() ? 'Name' : 'Id' }}</mat-label>
       <input
         matInput
-        [value]="query()"
-        (input)="updateSearch($event.target.value)"
-        [placeholder]="'Introduce the Brands\' ' + byName() ? 'name' : 'Id'"
+        [formField]="searchForm.query"
+        [placeholder]="'Introduce the Brands\' ' + (searchForm.byName().value() ? 'name' : 'Id')"
       />
     </mat-form-field>
   </form>
-  <app-table [makes]="makes()"></app-table>
+
+  <app-table [makes]="filteredMakes()"></app-table>
 </div>

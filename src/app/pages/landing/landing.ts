@@ -1,42 +1,60 @@
-import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { form, FormField, debounce } from '@angular/forms/signals';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
-import { VehiclesService } from '../../services/vehicles-service/vehicles-service';
-import { Store } from '@ngrx/store';
-import { selectAllMakes } from '../../store/selectors/makes.selectors';
-import { MakesActions } from '../../store/actions/makes.actions';
 import { Table } from '../../components/table/table';
-import { Router, ActivatedRoute } from '@angular/router';
+import { MakesActions } from '../../store/actions/makes.actions';
+import { selectAllMakes } from '../../store/selectors/makes.selectors';
+
+interface SearchMake {
+  query: string;
+  byName: boolean;
+}
 
 @Component({
   selector: 'app-landing',
-  imports: [MatFormFieldModule, MatInput, MatSelect, MatOption, Table],
+  standalone: true,
+  imports: [MatFormFieldModule, MatInput, MatSelect, MatOption, Table, FormField],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
 })
 export class Landing implements OnInit {
-  private store = inject(Store);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
+  private readonly store = inject(Store);
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
-  makes = this.store.selectSignal(selectAllMakes);
-  query = signal(this.route.snapshot.queryParamMap.get('query') || '');
-  byName = signal(this.route.snapshot.queryParamMap.get('byName') !== 'false');
+  protected readonly searchModel = signal<SearchMake>({
+    query: this.route.snapshot.queryParamMap.get('query') || '',
+    byName: this.route.snapshot.queryParamMap.get('byName') !== 'false',
+  });
+
+  protected readonly searchForm = form(this.searchModel, (form) => {
+    debounce(form.query, 250);
+  });
+
+  filteredMakes = computed(() => {
+    const makes = this.store.selectSignal(selectAllMakes)();
+    const searchTerm = this.searchForm.query().value().toLowerCase().trim();
+    const isByName = this.searchForm.byName().value();
+
+    if (!searchTerm) return makes;
+
+    return makes.filter((make) =>
+      isByName
+        ? make.name.toLowerCase().includes(searchTerm)
+        : make.id.toString().includes(searchTerm),
+    );
+  });
 
   constructor() {
     effect(() => {
-      const queryParams = {
-        query: this.query(),
-        byName: this.byName(),
-      };
-
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams,
-        queryParamsHandling: 'merge',
-        replaceUrl: true,
-      });
+      const query = this.searchForm.query().value();
+      const isByName = this.searchForm.byName().value();
+      this.navigateTo(query, isByName);
     });
   }
 
@@ -44,11 +62,12 @@ export class Landing implements OnInit {
     this.store.dispatch(MakesActions.loadMakes());
   }
 
-  updateSearch(query: string) {
-    this.query.set(query);
-  }
-
-  toggleSearchType(isByName: boolean) {
-    this.byName.set(isByName);
+  private navigateTo(query: string, isByName: boolean) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { query, byName: isByName },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
   }
 }
