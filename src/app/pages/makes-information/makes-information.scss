@@ -1,0 +1,14 @@
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - 2 * var(--page-padding));
+  gap: 1rem;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .page-wrapper {
+    width: 75%;
+    margin: 0 auto;
+  }
+}

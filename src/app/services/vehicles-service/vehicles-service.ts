@@ -5,7 +5,7 @@ import { API_URL } from '../../environment/env';
 import { VehicleTypeDto } from './dtos/vehicle-type.dto';
 import { Make } from './models/make';
 import { Identifiable } from '../../components/table/identifiable';
-import { MakeModelDto } from './dtos/make-model.dto';
+import { VehicleModelDto } from './dtos/vehicle-model.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -40,15 +40,15 @@ export class VehiclesService {
       );
   }
 
-  getModelsByMakeId(makeId: number) {
+  getVehicleModelsByMakeId(makeId: number) {
     return this.http
       .get<{
-        Results: MakeModelDto[];
-      }>(`${API_URL}/vehicles/GetVehicleTypesForMakeId/${makeId}?format=json`)
+        Results: VehicleModelDto[];
+      }>(`${API_URL}/vehicles/GetModelsForMakeId/${makeId}?format=json`)
       .pipe(
         map((response) =>
           response.Results.map(
-            (dto: MakeModelDto): Identifiable => ({
+            (dto: VehicleModelDto): Identifiable => ({
               id: dto.Model_ID,
               name: dto.Model_Name,
             }),

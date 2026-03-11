@@ -1,4 +1,4 @@
-export interface MakeModelDto {
+export interface VehicleModelDto {
   Make_ID: number;
   Make_Name: string;
   Model_ID: number;

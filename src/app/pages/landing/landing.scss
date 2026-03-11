@@ -17,15 +17,16 @@
   }
 }
 
-h1 {
-  text-align: center;
-}
-
 @media (min-width: 768px) {
   .search-form {
     width: 50%;
     margin: 0 auto;
     flex-direction: row;
     gap: 0.5rem;
+  }
+
+  .page-wrapper {
+    width: 75%;
+    margin: 0 auto;
   }
 }

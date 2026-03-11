@@ -8,13 +8,14 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { makesReducer } from './store/reducers/makes.reducers';
 import * as makesEffects from './store/effects/makes.effects';
+import * as informationEffects from './store/effects/information.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideStore(),
-    provideEffects(makesEffects),
+    provideEffects(makesEffects, informationEffects),
     provideState({ name: 'makes', reducer: makesReducer }),
     provideStoreDevtools({
       maxAge: 25,

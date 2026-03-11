@@ -1,5 +1,9 @@
 <div class="page-wrapper">
-  <h1 class="mat-headline-4">Vehicle Brand Explorer</h1>
+  <h1 class="mat-headline-4">Brand Information</h1>
 
-  <app-table [items]="[]"></app-table>
+  <h2>Vehicle types</h2>
+  <app-table class="table-content" [items]="information().types"></app-table>
+
+  <h2>Vehicle models</h2>
+  <app-table class="table-content" [items]="information().models"></app-table>
 </div>
