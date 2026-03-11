@@ -5,6 +5,9 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { VehiclesService } from '../../services/vehicles-service/vehicles-service';
+import { Store } from '@ngrx/store';
+import { selectAllMakes } from '../../store/selectors/makes.selectors';
+import { MakesActions } from '../../store/actions/makes.actions';
 
 @Component({
   selector: 'app-landing',
@@ -15,5 +18,16 @@ import { VehiclesService } from '../../services/vehicles-service/vehicles-servic
 export class Landing {
   vehiclesService = inject(VehiclesService);
   byName = input(true);
-  makes = toSignal(this.vehiclesService.getAllMakes(), { initialValue: [] });
+
+  private store = inject(Store);
+
+  makes = this.store.selectSignal(selectAllMakes);
+
+  ngOnInit() {
+    this.store.dispatch(MakesActions.loadMakes());
+  }
+
+  trackById(_: number, make: Make) {
+    return make.id;
+  }
 }

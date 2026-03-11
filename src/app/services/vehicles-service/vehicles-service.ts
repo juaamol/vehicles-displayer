@@ -22,13 +22,3 @@ export class VehiclesService {
       );
   }
 }
-
-interface MakeDto {
-  Make_ID: number;
-  Make_Name: string;
-}
-
-interface Make {
-  id: number;
-  name: string;
-}

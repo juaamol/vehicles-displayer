@@ -29,7 +29,12 @@
     </div>
 
     <cdk-virtual-scroll-viewport itemSize="48" minBufferPx="400" maxBufferPx="800" class="viewport">
-      <div *cdkVirtualFor="let make of makes()" class="data-row" role="row" mat-ripple>
+      <div
+        *cdkVirtualFor="let make of makes(); trackBy: trackById"
+        class="data-row"
+        role="row"
+        mat-ripple
+      >
         <div class="cell" role="cell">{{ make.name }}</div>
         <div class="cell" role="cell">{{ make.id }}</div>
       </div>
