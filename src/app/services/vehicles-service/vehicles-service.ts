@@ -6,6 +6,7 @@ import { VehicleTypeDto } from './dtos/vehicle-type.dto';
 import { Make } from './models/make';
 import { Identifiable } from '../../components/table/identifiable';
 import { VehicleModelDto } from './dtos/vehicle-model.dto';
+import { MakeDto } from './dtos/make.dto';
 
 @Injectable({
   providedIn: 'root',
