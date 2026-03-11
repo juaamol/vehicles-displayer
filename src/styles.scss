@@ -61,3 +61,9 @@ h2 {
   box-sizing: border-box;
   overflow: hidden;
 }
+
+.error-snackbar {
+  --mdc-snackbar-container-color: #b00020;
+  --mdc-snackbar-label-text-color: white;
+  --mat-snack-bar-button-color: white;
+}
