@@ -15,6 +15,7 @@ Features include:
 - Better UI: The API is simple and provides mostly names and ids. The design could be improved if there were images for instance.
 - I was not able to find details about errors or how to "consider" then in the API so the error handling is rudimentary. Just a snackbar when something happens
 - A custom table has been used instead of an Angular Material one. It produced unintended behaviours when paired with Angular CDK VirtualScroll. With more time a solution could be found.
+- Information about pagination, sorting, filtering was not found. Pagination is a great match for Angular Material tables.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
 
