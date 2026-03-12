@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { API_URL } from '../../environment/env';
 import { VehicleTypeDto } from './dtos/vehicle-type.dto';
 import { Make } from './models/make';
 import { Identifiable } from '../../components/table/identifiable';
 import { VehicleModelDto } from './dtos/vehicle-model.dto';
 import { MakeDto } from './dtos/make.dto';
+import { API_URL } from '../../../environments/env';
 
 @Injectable({
   providedIn: 'root',

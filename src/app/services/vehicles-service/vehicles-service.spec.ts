@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { VehiclesService } from './vehicles-service';
-import { API_URL } from '../../environment/env';
+import { API_URL } from '../../../environments/env';
 
 describe('VehiclesService', () => {
   let service: VehiclesService;
