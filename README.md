@@ -8,6 +8,7 @@ Features include:
 - Ability to filter brands by name or ID
 - Detailed brand pages showing available vehicle types and models
 - Uses NgRx for state management and Playwright/Vitest for tests
+- Build and deploy workflow for Github Actions
 
 ## Possible improvements
 
